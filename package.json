@@ -1,0 +1,19 @@
+{
+  "name": "express-mongo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Renato",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "jest": "^27.2.1",
+    "nodemon": "^3.0.1"
+  }
+}
