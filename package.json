@@ -15,5 +15,8 @@
   "devDependencies": {
     "jest": "^27.2.1",
     "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
   }
 }

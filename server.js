@@ -1,14 +1,6 @@
-import http from "http" //lib padrão do node
+//import http from "http" //lib padrão do node
+import app from "./src/app.js"
 
-const rotas = {
-    "/": "Curso de NodeJS e Express"
-}
-
-const server = http.createServer((req, res) => {
-    res.writeHead(200, { "Content-Type": "text:plain"})
-    res.end(rotas[req.url])
-})
-
-server.listen(3000, () => {
+app.listen(3000, () => {
     console.log("servidor escutando!")
 })
