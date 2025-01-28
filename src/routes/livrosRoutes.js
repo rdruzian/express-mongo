@@ -7,5 +7,6 @@ routes.get("/livros", LivroController.listarLivros)
 routes.get("/livros/:id", LivroController.buscaLivroById)
 routes.post("/livros", LivroController.cadastrarLivro)
 routes.put("/livros/:id", LivroController.atualizarLivroById)
+routes.delete("/livros/:id", LivroController.excluirLivro)
 
 export default routes
