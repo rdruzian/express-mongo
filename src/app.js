@@ -1,22 +1,14 @@
-import express from "express"
-import conecta from "./config/dbConnect.js"
+import express from "express";
+import db from "./config/dbConnect.js"
 import routes from "./routes/index.js"
 
-const conexao = await conecta()
-
-conexao.on("error", (error) => {
-    console.error("erro de conexao", erro)
+db.on("error", console.log.bind(console, 'Erro de conexão'))
+db.once("open", () => {
+  console.log('conexão com o banco feita com sucesso')
 })
 
-conexao.once("open", () => {
-    console.log("Conexao com sucesso")
-})
-
-const app = express()
-routes(app)
-
-app.get("/", (req, res) => {
-    res.status(200).send("Curso NodeJs e Express")
-})
+const app = express();
+app.use(express.json())
+routes(app);
 
 export default app
