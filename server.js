@@ -1,4 +1,4 @@
-//import http from "http" //lib padrão do node
+import "dotenv/config"
 import app from "./src/app.js"
 
 app.listen(3000, () => {
