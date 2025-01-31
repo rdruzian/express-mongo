@@ -1,4 +1,5 @@
  
+import NotFound from "../erros/NotFound.js"
 import livros from "../models/Livros.js"
 
 class LivroController {
@@ -24,7 +25,11 @@ class LivroController {
         .populate("autor", "nome")
         .exec()
 
-      res.status(200).send(livroResultados)
+        if (livroResultados !== null) {
+          res.status(200).send(livroResultados);
+        } else {
+          next(new NotFound("Id do livro não localizado."));
+        }
     } catch (erro) {
       next(erro)
     }
@@ -46,9 +51,15 @@ class LivroController {
     try {
       const id = req.params.id
 
-      await livros.findByIdAndUpdate(id, {$set: req.body})
+      const livroResultado = await livros.findByIdAndUpdate(id, {$set: req.body});
 
-      res.status(200).send({message: "Livro atualizado com sucesso"})
+      console.log(livroResultado);
+    
+      if (livroResultado !== null) {
+        res.status(200).send({message: "Livro atualizado com sucesso"});
+      } else {
+        next(new NotFound("Id do livro não localizado."));
+      }
     } catch (erro) {
       next(erro)
     }
@@ -78,9 +89,6 @@ class LivroController {
       next(erro)
     }
   }
-
-
-
 }
 
 export default LivroController
