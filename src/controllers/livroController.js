@@ -1,17 +1,31 @@
  
 import NotFound from "../erros/NotFound.js"
 import {livros, autores} from "../models/index.js"
+import RequisicaoIncorreta from "../erros/RequisicaoIncorreta.js"
 
 class LivroController {
 
   static listarLivros = async (req, res, next) => {
     try {
+      let { limite = 5, pagina = 1, ordenacao = "_id:-1" } =  req.query //?ordenacao=titulo:1 -> formato da busca na url
+      let [campoOrdenacao, ordem] = ordenacao.split(":")
 
-      const livrosResultado = await livros.find()
-        .populate("autor")
-        .exec()
+      limite = parseInt(limite)
+      pagina = parseInt(pagina)
+      ordem = parseInt(ordem)
 
-      res.status(200).json(livrosResultado)
+      if (limite > 0 && pagina > 0 ) {
+        const livrosResultado = await livros.find()
+          .sort({ [campoOrdenacao]: ordem })
+          .skip((pagina-1)*limite)
+          .limit(limite)
+          .populate("autor")
+          .exec()
+
+        res.status(200).json(livrosResultado)
+      } else {
+        next(new RequisicaoIncorreta())
+      }
     } catch (erro) {
       next(erro)
     }
