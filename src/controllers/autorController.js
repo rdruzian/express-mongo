@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import NotFound from "../erros/NotFound.js"
-import {autor} from "../models/Autor.js"
+import {autor} from "../models/index.js"
 
 class AutorController {
 
