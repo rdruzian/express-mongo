@@ -1,9 +1,10 @@
 import express from "express"
 import AutorController from "../controllers/autorController.js"
+import paginacao from "../middlewares/paginacao.js"
 
 const routes = express.Router()
 
-routes.get("/autores", AutorController.listarAutores)
+routes.get("/autores", AutorController.listarAutores, paginacao)
 routes.get("/autores/:id", AutorController.buscaAutorById)
 routes.post("/autores", AutorController.cadastrarAutor)
 routes.put("/autores/:id", AutorController.atualizarAutorById)
