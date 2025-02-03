@@ -16,7 +16,6 @@ async function paginacao(req, res, next) {
             .sort({ [campoOrdenacao]: ordem })
             .skip((pagina-1)*limite)
             .limit(limite)
-            .populate("autor")
             .exec()
 
         res.status(200).json(resultadoPaginado)
