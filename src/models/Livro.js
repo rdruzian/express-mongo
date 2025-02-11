@@ -24,6 +24,6 @@ const livroSchema = new mongoose.Schema({
     autor: { type: mongoose.Schema.Types.ObjectId, ref: "autor", required: [true, "Autor é obrigatório"] }
 }, { versionKey: false })
 
-const livro = mongoose.model("livros", livroSchema)
+const livros = mongoose.model("livros", livroSchema)
 
-export default livro
+export default livros

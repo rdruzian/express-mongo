@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import NotFound from "../erros/NotFound.js"
-import {autor} from "../models/index.js"
+import { autores } from "../models/index.js"
 
 class AutorController {
 
   static listarAutores = async(req, res, next) => {
     try {
-      const autoresResultado = autor.find()
+      const autoresResultado = autores.find()
 
       req.resultado = autoresResultado
 
@@ -20,7 +20,7 @@ class AutorController {
     try {
       const id = req.params.id
 
-      const autorResultado = await autor.findById(id)
+      const autorResultado = await autores.findById(id)
       if (autorResultado !== null) {
         res.status(200).send(autorResultado)
       } else {
@@ -35,7 +35,7 @@ class AutorController {
     try {
       let autor = new autor(req.body)
 
-      const autorResultado = await autor.save()
+      const autorResultado = await autores.save()
 
       res.status(201).send(autorResultado.toJSON())
     } catch (erro) {
@@ -47,7 +47,7 @@ class AutorController {
     try {
       const id = req.params.id
 
-      const autorResultado = await autor.findByIdAndUpdate(id, {$set: req.body})
+      const autorResultado = await autores.findByIdAndUpdate(id, {$set: req.body})
 
       if (autorResultado !== null) {
         res.status(200).send({message: "Autor atualizado com sucesso"});
@@ -63,7 +63,7 @@ class AutorController {
     try {
       const id = req.params.id
 
-      const autorResultado = await autor.findByIdAndDelete(id);
+      const autorResultado = await autores.findByIdAndDelete(id);
 
 
       if (autorResultado !== null) {
